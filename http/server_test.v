@@ -83,7 +83,7 @@ fn test_server_custom_handler() ! {
 	//
 	http.fetch(url: 'http://localhost:$cport/something/else')!
 	server.stop()
-	t.wait() or { return err }
+	t.wait()!
 	assert handler.counter == 3
 	assert handler.oks == 2
 	assert handler.not_founds == 1

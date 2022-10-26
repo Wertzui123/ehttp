@@ -182,8 +182,8 @@ fn fetch_with_method(method Method, _config FetchConfig) !Response {
 	return fetch(config)
 }
 
-fn build_url_from_fetch(config FetchConfig) ?string {
-	mut url := urllib.parse(config.url)?
+fn build_url_from_fetch(config FetchConfig) !string {
+	mut url := urllib.parse(config.url)!
 	if config.params.len == 0 {
 		return url.str()
 	}

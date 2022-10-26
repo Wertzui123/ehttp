@@ -13,7 +13,7 @@ fn (req &Request) ssl_do(port int, method Method, host_name string, path string)
 	mut ssl_conn := tlse.new_ssl_conn()
 	ssl_conn.connect(host_name, port)
 	req_headers := req.build_request_headers(method, host_name, path)
-	ssl_conn.write(req_headers.bytes()) or { return err }
+	ssl_conn.write(req_headers.bytes())!
 	mut response_bytes := []u8{len: 0xFFFF}
 	ssl_conn.read(mut response_bytes)
 	response_text := response_bytes.bytestr()

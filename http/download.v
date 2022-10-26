@@ -7,18 +7,18 @@ import os
 
 // download_file retrieves a document from the URL `url`,
 // and saves it in the output file path `out_file_path`.
-pub fn download_file(url string, out_file_path string) ? {
+pub fn download_file(url string, out_file_path string) ! {
 	$if debug_http ? {
 		println('http.download_file url=$url out_file_path=$out_file_path')
 	}
-	s := get(url) or { return err }
+	s := get(url)!
 	if s.status() != .ok {
 		return error('received http code $s.status_code')
 	}
 	$if debug_http ? {
 		println('http.download_file saving $s.text.len bytes')
 	}
-	os.write_file(out_file_path, s.text)?
+	os.write_file(out_file_path, s.text)!
 }
 
 // TODO: implement download_file_with_progress
