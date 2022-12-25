@@ -15,7 +15,7 @@ fn (req &Request) ssl_do(port int, method Method, host_name string, path string)
 	req_headers := req.build_request_headers(method, host_name, path)
 	ssl_conn.write(req_headers.bytes())!
 	mut response_bytes := []u8{cap: 0xFFFF}
-	mut response_bytes_chunk := []u8{cap: 0xFFFF}
+	mut response_bytes_chunk := []u8{len: 0xFFFF}
 	for {
 		read := ssl_conn.read(mut response_bytes_chunk)
 		if read <= 0 {
