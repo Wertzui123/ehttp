@@ -1,7 +1,7 @@
 import wertzui123.ehttp.http
 import time
 
-fn test_server_stop() ? {
+fn test_server_stop() ! {
 	mut server := &http.Server{
 		accept_timeout: 1 * time.second
 	}
@@ -11,11 +11,11 @@ fn test_server_stop() ? {
 	server.stop()
 	assert server.status() == .stopped
 	assert watch.elapsed() < 100 * time.millisecond
-	t.wait()?
+	t.wait()!
 	assert watch.elapsed() < 999 * time.millisecond
 }
 
-fn test_server_close() ? {
+fn test_server_close() ! {
 	mut server := &http.Server{
 		accept_timeout: 1 * time.second
 		handler: MyHttpHandler{}
@@ -26,7 +26,7 @@ fn test_server_close() ? {
 	server.close()
 	assert server.status() == .closed
 	assert watch.elapsed() < 100 * time.millisecond
-	t.wait()?
+	t.wait()!
 	assert watch.elapsed() < 999 * time.millisecond
 }
 
