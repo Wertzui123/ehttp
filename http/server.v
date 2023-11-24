@@ -64,19 +64,19 @@ pub fn (mut s Server) listen_and_serve() ! {
 }
 
 // stop signals the server that it should not respond anymore
-[inline]
+@[inline]
 pub fn (mut s Server) stop() {
 	s.state = .stopped
 }
 
 // close immediatly closes the port and signals the server that it has been closed
-[inline]
+@[inline]
 pub fn (mut s Server) close() {
 	s.state = .closed
 	s.listener.close() or { return }
 }
 
-[inline]
+@[inline]
 pub fn (s &Server) status() ServerStatus {
 	return s.state
 }

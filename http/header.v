@@ -431,7 +431,7 @@ pub fn (mut h Header) delete_custom(key string) {
 	}
 }
 
-[params]
+@[params]
 pub struct HeaderCoerceConfig {
 	canonicalize bool
 }
@@ -463,7 +463,7 @@ pub fn (h Header) contains(key CommonHeader) bool {
 	return h.contains_custom(key.str())
 }
 
-[params]
+@[params]
 pub struct HeaderQueryConfig {
 	exact bool
 }
@@ -534,7 +534,7 @@ pub fn (h Header) keys() []string {
 	return h.data.keys()
 }
 
-[params]
+@[params]
 pub struct HeaderRenderConfig {
 	version      Version
 	coerce       bool
@@ -543,7 +543,7 @@ pub struct HeaderRenderConfig {
 
 // render renders the Header into a string for use in sending HTTP
 // requests. All header lines will end in `\r\n`
-[manualfree]
+@[manualfree]
 pub fn (h Header) render(flags HeaderRenderConfig) string {
 	// estimate ~48 bytes per header
 	mut sb := strings.new_builder(h.data.len * 48)
